@@ -1,0 +1,57 @@
+package com.form.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.form.entity.Employee;
+import com.form.helper.FactoryProvider;
+
+public class RegisterServlet extends HttpServlet {
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		Integer id = Integer.parseInt(req.getParameter("id"));
+		String name = req.getParameter("name");
+		String department = req.getParameter("department");
+		Double salary = Double.parseDouble(req.getParameter("salary"));
+		String email = req.getParameter("email");
+		String password = (req.getParameter("password"));
+
+		Employee employee = new Employee();
+		employee.setId(id);
+		employee.setName(name);
+		employee.setDept(department);
+		employee.setSalary(salary);
+		employee.setEmail(email);
+		employee.setPassword(password);
+
+		Session session = FactoryProvider.getFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		int save = (Integer) session.save(employee);
+
+		PrintWriter pw = resp.getWriter();
+
+		tx.commit();
+		if (save > 0) {
+			pw.println("<h1 style='text-align:center;'>Employee Register Successfully</h1>");
+			System.out.println("Employee Register Successfully");
+		} else {
+			pw.println("<h1 class='text-center;'>Employee Register Failed</h1>");
+			System.err.println("Employee Register Failed");
+		}
+
+		session.close();
+
+	}
+}
