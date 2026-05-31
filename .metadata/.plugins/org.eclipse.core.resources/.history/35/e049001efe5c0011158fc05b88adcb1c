@@ -1,0 +1,37 @@
+<form action="${pageContext.request.contextPath}/updateServlet"
+	method="post">
+
+	<input type="hidden" name="id" value="${expanse.id}">
+
+	<div class="mb-3">
+		<label class="form-label">Title</label> <input type="text"
+			name="title" class="form-control" value="${expanse.title}" required>
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Date</label> <input type="date" name="date"
+			class="form-control" value="${expanse.date}" required>
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Time</label> <input type="time" name="time"
+			class="form-control" value="${expanse.time}" required>
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Description</label> <input type="text"
+			name="desc" class="form-control" value="${expanse.desc}" required>
+	</div>
+
+	<div class="mb-3">
+		<label class="form-label">Price</label> <input type="number"
+			step="0.01" name="price" class="form-control"
+			value="${expanse.price}" required>
+	</div>
+
+	<div class="text-center">
+		<button type="submit" class="btn btn-success px-5">Update
+			Expense</button>
+	</div>
+
+</form>

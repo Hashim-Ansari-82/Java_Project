@@ -1,0 +1,28 @@
+package com.track.entity;
+
+import java.sql.Time;
+import java.util.Date;
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.Temporal;
+import jakarta.persistence.TemporalType;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+public class Expanse {
+
+	@Id
+	private int id;
+	private String title;
+	@Temporal(TemporalType.DATE)
+	private Date date;
+	@Temporal(TemporalType.TIME)
+	private Time time;
+	private double price;
+	private User user;
+	
+}

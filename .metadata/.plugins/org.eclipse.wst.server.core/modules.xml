@@ -5,4 +5,5 @@
   <module moduleId="org.eclipse.jst.jee.server:Search_App" serverId="Tomcat v9.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.j2ee.server:NoteTaker" serverId="Tomcat v9.0 Server at localhost"/>
   <module moduleId="org.eclipse.jst.j2ee.server:Online_Expanse_Tracker" serverId="Tomcat v9.0 Server at localhost"/>
+  <module moduleId="org.eclipse.jst.jee.server:Registraion_Form" serverId="Tomcat v9.0 Server at localhost"/>
 </modules>

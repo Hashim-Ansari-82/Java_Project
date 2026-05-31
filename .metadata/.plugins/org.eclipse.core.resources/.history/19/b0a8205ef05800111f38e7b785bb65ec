@@ -1,0 +1,48 @@
+package com.track.servlet;
+
+import java.io.IOException;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
+
+import javax.servlet.ServletException;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+
+import com.track.helper.FactoryProvider;
+
+public class SaveExpanseServlet extends HttpServlet {
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+		Session session = FactoryProvider.getFactory().openSession();
+		Transaction tx = session.beginTransaction();
+
+		String title = req.getParameter("title");
+		String d = req.getParameter("date");
+		String t = req.getParameter("time");
+
+		SimpleDateFormat sdf = new SimpleDateFormat("dd-MM-yyyy");
+		try {
+			Date date = sdf.parse(d);
+			
+			SimpleDateFormat sdf1 = new SimpleDateFormat("HH:mm");
+			
+			Date time = sdf.parse(t);
+			
+		} catch (ParseException e) {
+			e.printStackTrace();
+		}
+
+		String desc = req.getParameter("description");
+		Double price = Double.parseDouble(req.getParameter("price"));
+	}
+
+}

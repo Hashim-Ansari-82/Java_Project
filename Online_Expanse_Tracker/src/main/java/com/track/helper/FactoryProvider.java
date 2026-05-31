@@ -1,0 +1,27 @@
+package com.track.helper;
+
+import org.hibernate.SessionFactory;
+import org.hibernate.cfg.Configuration;
+
+import com.track.entity.Expanse;
+import com.track.entity.User;
+
+public class FactoryProvider {
+
+	public static SessionFactory factory;
+	
+	public static SessionFactory getFactory() {
+		
+		if(factory==null) {
+			factory = new Configuration().addAnnotatedClass(Expanse.class)
+		.addAnnotatedClass(User.class).configure().buildSessionFactory();
+		}
+		return factory;
+	}
+	public static void closeFactory() {
+		
+		if(factory.isOpen()) {
+			factory.close();
+		}
+	} 
+}

@@ -1,0 +1,37 @@
+package com.track.servlet;
+
+import java.io.IOException;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import com.track.helper.FactoryProvider;
+
+@WebServlet("/updateServlet")
+public class UpdateExpanseServlet extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+        Session session = FactoryProvider.getFactory().openSession();	
+        Transaction tx = session.beginTransaction();
+       
+        String id = req.getParameter("id");
+        
+        Query query = session.createQuery("from expanse where id=:id");
+       query.setParameter("id", id);
+       Object uniqueResult = query.uniqueResult();
+	}
+
+	
+	
+}

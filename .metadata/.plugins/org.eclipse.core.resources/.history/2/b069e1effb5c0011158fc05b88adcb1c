@@ -1,0 +1,87 @@
+<div class="container py-4">
+
+    <div class="row justify-content-center">
+
+        <div class="col-12 col-lg-10">
+
+            <div class="card shadow">
+
+                <div class="card-header text-center">
+                    <h3 class="mb-0">All Expenses</h3>
+                </div>
+
+                <!-- IMPORTANT FIX -->
+                <div class="card-body p-2 p-md-3">
+
+                    <div class="table-responsive">
+                        <table class="table table-bordered table-hover align-middle text-nowrap">
+
+                            <thead class="table-dark">
+                                <tr>
+                                    <th>Title</th>
+                                    <th>Description</th>
+                                    <th>Date</th>
+                                    <th>Time</th>
+                                    <th class="text-center">Action</th>
+                                </tr>
+                            </thead>
+
+                            <tbody>
+
+                                <%
+                                List<Expanse> list = (List<Expanse>) request.getAttribute("exList");
+
+                                if (list != null && !list.isEmpty()) {
+
+                                    for (Expanse e : list) {
+                                %>
+
+                                <tr>
+                                    <td><%=e.getTitle()%></td>
+                                    <td><%=e.getDesc()%></td>
+                                    <td><%=e.getDate()%></td>
+                                    <td><%=e.getTime()%></td>
+
+                                    <td class="text-center">
+                                        <a href="<%=request.getContextPath()%>/updateServlet?id=<%=e.getId()%>"
+                                           class="btn btn-sm btn-primary mb-1">
+                                            <i class="fa-solid fa-pen-to-square"></i> Edit
+                                        </a>
+
+                                        <a href="<%=request.getContextPath()%>/deleteExpense?id=<%=e.getId()%>"
+                                           class="btn btn-sm btn-danger ms-1 mb-1"
+                                           onclick="return confirm('Delete this expense?')">
+                                            <i class="fa-solid fa-trash"></i> Delete
+                                        </a>
+                                    </td>
+                                </tr>
+
+                                <%
+                                    }
+                                } else {
+                                %>
+
+                                <tr>
+                                    <td colspan="5" class="text-center text-danger">
+                                        No Data Found
+                                    </td>
+                                </tr>
+
+                                <%
+                                }
+                                %>
+
+                            </tbody>
+
+                        </table>
+                    </div>
+
+                </div>
+
+            </div>
+
+        </div>
+
+    </div>
+
+</div>

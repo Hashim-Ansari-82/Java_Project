@@ -1,0 +1,39 @@
+package com.track.entity;
+
+import java.util.Random;
+
+import jakarta.persistence.Column;
+import jakarta.persistence.Entity;
+import jakarta.persistence.Id;
+import jakarta.persistence.ManyToOne;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Entity
+@Data
+@NoArgsConstructor
+public class Expanse {
+
+	@Id
+	private int id;
+	private String title;
+	private String date;
+	private String time;
+	@Column(name = "desription")
+	private String desc;
+	private double price;
+	@ManyToOne
+	private User user;
+
+	public Expanse(String title, String date, String time, String desc, double price, User user) {
+		super();
+		this.id= 100 + new Random().nextInt(9000);
+		this.title = title;
+		this.date = date;
+		this.time = time;
+		this.desc = desc;
+		this.price = price;
+		this.user = user;
+	}
+	
+}

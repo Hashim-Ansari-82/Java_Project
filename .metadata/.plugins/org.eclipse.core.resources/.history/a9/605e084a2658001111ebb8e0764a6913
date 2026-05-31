@@ -1,0 +1,18 @@
+package com.track.dao;
+
+import org.hibernate.Session;
+import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
+
+import com.track.helper.FactoryProvider;
+
+public class UserRegister {
+
+	public static void main(String[] args) {
+		
+		SessionFactory factory = FactoryProvider.getFactory();
+		Session session = factory.openSession();
+		Transaction tx = session.beginTransaction();
+		
+	}
+}

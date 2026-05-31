@@ -1,0 +1,11 @@
+package snippet;
+
+public class Snippet {
+	<br>
+		<div class="card mx-auto mt-4 p-4 text-center card-sh"
+			style="width: 50%; border-radius: 30px;">
+			<img alt="" src="image/img.png"
+				class="img-fluid rounded mx-auto d-block" style="width: 70%;">
+		</div>
+}
+

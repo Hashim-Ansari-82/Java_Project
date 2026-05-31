@@ -1,0 +1,49 @@
+package com.track.servlet;
+
+import java.io.IOException;
+import java.io.PrintWriter;
+
+import javax.servlet.ServletException;
+import javax.servlet.annotation.WebServlet;
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+
+import org.hibernate.Session;
+import org.hibernate.Transaction;
+import org.hibernate.query.Query;
+
+import com.track.entity.User;
+import com.track.helper.FactoryProvider;
+
+@WebServlet("/userLogin")
+public class LoginServlet extends HttpServlet{
+
+	private static final long serialVersionUID = 1L;
+
+	@Override
+	protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		
+		Session session = FactoryProvider.getFactory().openSession();
+		Transaction tx = session.beginTransaction();
+		
+		String email = req.getParameter("email");
+		String pass = req.getParameter("password");
+		
+		Query<User> query = session.createQuery("from User where email=:em and password=:pass");
+		query.setParameter("em", email);
+		query.setParameter("pass", pass);
+		
+		PrintWriter writer = resp.getWriter();
+		
+		User result = query.uniqueResult();
+		if(result != null) {
+			writer.println("<h1 style=text-align:center; color:green; >Login Successfully</h1>");
+		}
+		else {
+			writer.println("<h1 style=text-align:center; color:green; >Email or password wrong</h1>");
+		}
+		tx.commit();
+		session.close();
+	}
+}

@@ -1,14 +1,13 @@
 package com.form.entity;
 
 
+import java.util.Random;
+
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.Id;
 
-import lombok.Data;
-
 @Entity
-@Data
 public class Employee {
 
 	@Id
@@ -24,4 +23,14 @@ public class Employee {
 	private String email;
 	@Column(name = "employee_password")
 	private String password;
+	public Employee(String name, String dept, Double salary, String email, String password) {
+		super();
+		this.id = 100000 + new Random().nextInt(900000);
+		this.name = name;
+		this.dept = dept;
+		this.salary = salary;
+		this.email = email;
+		this.password = password;
+	}
+	
 }

@@ -25,12 +25,6 @@
 						<form method="post" action="RegisterServlet">
 
 							<div class="mb-3">
-								<label for="employeeId" class="form-label">Employee Id</label> <input
-									type="text" class="form-control" name="id" placeHolder="Enter id here">
-									
-							</div>
-
-							<div class="mb-3">
 								<label for="employeeName" class="form-label">Employee Name</label> 
 								<input type="text" class="form-control" name="name" placeHolder="Enter name here">
 							</div>

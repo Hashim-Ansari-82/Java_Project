@@ -1,0 +1,98 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+	pageEncoding="UTF-8"%>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
+<%@ page isELIgnored="false"%>
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Edit Expense</title>
+
+<%@ include file="../component/all_css_js.jsp"%>
+
+<style>
+.card-sh {
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
+}
+</style>
+
+</head>
+<body class="bg-light">
+
+	<c:if test="${empty loginUser}">
+		<c:redirect url="../login.jsp" />
+	</c:if>
+
+	<%@ include file="../component/navbar.jsp"%>
+
+	<div class="container-fluid d-flex justify-content-center align-items-center"
+		style="height: 90vh;">
+
+		<div class="card card-sh"
+			style="width: 45%; border-radius: 20px;">
+
+			<div class="card-header text-center">
+				<h3 class="text-success">Edit Expense</h3>
+			</div>
+
+			<div class="card-body">
+
+				<form action="../updateServlet" method="post">
+
+					<!-- Hidden Expense ID -->
+					<input type="hidden" name="id" value="${expanse.id}">
+
+					<div class="mb-3">
+						<label class="form-label">Title</label>
+						<input type="text" name="title"
+							class="form-control"
+							value="${expanse.title}" required>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Date</label>
+						<input type="date" name="date"
+							class="form-control"
+							value="${expanse.date}" required>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Time</label>
+						<input type="time" name="time"
+							class="form-control"
+							value="${expanse.time}" required>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Description</label>
+						<input type="text" name="desc"
+							class="form-control"
+							value="${expanse.desc}" required>
+					</div>
+
+					<div class="mb-3">
+						<label class="form-label">Price</label>
+						<input type="number" step="0.01"
+							name="price"
+							class="form-control"
+							value="${expanse.price}" required>
+					</div>
+
+					<div class="text-center">
+						<button type="submit"
+							class="btn btn-success px-5">
+							Update Expense
+						</button>
+					</div>
+
+				</form>
+
+			</div>
+
+		</div>
+
+	</div>
+
+</body>
+</html>
