@@ -26,6 +26,8 @@
 	</section>
 	<section name="Maven2ProjectWizardArchifactPage">
 		<list key="package">
+			<item value="com.doctorfinder"/>
+			<item value="com.library"/>
 			<item value="com.search"/>
 			<item value="com.note.Note_Taker"/>
 			<item value="com.note"/>
@@ -33,12 +35,16 @@
 			<item value="com.tracker.Online_Expanse_Tracker"/>
 		</list>
 		<list key="groupId">
+			<item value="com.doctorfinder"/>
+			<item value="com.library"/>
 			<item value="com.search"/>
 			<item value="com.note"/>
 			<item value="com.form"/>
 			<item value="com.tracker"/>
 		</list>
 		<list key="artifactId">
+			<item value="Finding_Doctor_Online"/>
+			<item value="LibraryManagementSystem"/>
 			<item value="Search_App"/>
 			<item value="Note_Taker"/>
 			<item value="NoteTaker"/>

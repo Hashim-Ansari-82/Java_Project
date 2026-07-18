@@ -162,7 +162,7 @@
              Note: The pattern used is equivalent to using pattern="common" -->
         <Valve className="org.apache.catalina.valves.AccessLogValve" directory="logs" pattern="%h %l %u %t &quot;%r&quot; %s %b" prefix="localhost_access_log" suffix=".txt"/>
 
-      <Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Registraion_Form" path="/Registration_Form" reloadable="true" source="org.eclipse.jst.j2ee.server:Registraion_Form"/><Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Online_Expanse_Tracker" path="/Online_Expanse_Tracker" reloadable="true" source="org.eclipse.jst.j2ee.server:Online_Expanse_Tracker"/><Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Note_Taker" path="/NoteTaker" reloadable="true" source="org.eclipse.jst.j2ee.server:Note_Taker"/></Host>
+      <Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\ROOT" path="" reloadable="false"/><Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\LibraryManagementSystem" path="/LibraryManagementSystem" reloadable="true" source="org.eclipse.jst.j2ee.server:LibraryManagementSystem"/><Context docBase="D:\Java_Project\.metadata\.plugins\org.eclipse.wst.server.core\tmp0\wtpwebapps\Note_Taker" path="/NoteTaker" reloadable="true" source="org.eclipse.jst.j2ee.server:Note_Taker"/></Host>
     </Engine>
   </Service>
 </Server>
