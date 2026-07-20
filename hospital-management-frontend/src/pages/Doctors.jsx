@@ -176,19 +176,19 @@ function Doctors() {
     );
     const totalDoctors = doctors.length;
 
-    const cardiologyDoctors = doctors.filter(
-        (doc) => doc.specialization === "Cardiology"
+    const cardiologyDoctors = doctors.filter((doc) =>
+        (doc.specialization || '')
+            .trim()
+            .toLowerCase()
+            .includes('cardio')
     ).length;
 
-    const orthopedicsDoctors = doctors.filter((doc) => {
-    const spec = (doc.specialization || "").trim().toLowerCase();
-
-    return (
-        spec.includes("orthopedic") ||
-        spec.includes("orthopaedic") ||
-        spec.includes("orthopedics")
-    );
-}).length;
+    const orthopedicsDoctors = doctors.filter((doc) =>
+        (doc.specialization || '')
+            .trim()
+            .toLowerCase()
+            .includes('ortho')
+    ).length;
 
     const totalDepartments = [
         ...new Set(
@@ -319,8 +319,7 @@ function Doctors() {
             </div>
 
             {/* Statistics Cards */}
-
-            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-2 mb-5">
+            <div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-3 mb-5">
 
                 {stats.map((item, index) => (
 
@@ -328,42 +327,45 @@ function Doctors() {
                         key={index}
                         className={`
         bg-gradient-to-r ${item.bg}
-        rounded-xl
-        shadow-sm
-        p-2.5
+        rounded-2xl
+        shadow-md
+        px-3 py-2.5
         text-white
+        border border-white/10
         transition-all duration-300
-        hover:scale-105
-        hover:shadow-lg
+        hover:-translate-y-0.5
+        hover:shadow-xl
         cursor-pointer
+        min-h-[78px]
       `}
                     >
 
-                        <div className="flex justify-between items-center">
+                        <div className="flex justify-between items-center h-full">
 
                             {/* Left Side */}
-                            <div>
+                            <div className="flex-1 min-w-0">
 
-                                <p className="text-[11px] opacity-90 font-medium uppercase tracking-wide">
+                                <p className="text-[10px] md:text-[11px] opacity-90 font-semibold uppercase tracking-wider truncate">
                                     {item.title}
                                 </p>
 
-                                {/* Smaller Count */}
-                                <h1 className="text-2xl font-bold mt-1">
+                                <h1 className="text-xl md:text-2xl font-extrabold mt-1 leading-none">
                                     {item.count}
                                 </h1>
 
                             </div>
 
-                            {/* Smaller Icon */}
+                            {/* Icon */}
                             <div
                                 className="
-            w-10 h-10
-            rounded-full
+            w-9 h-9 md:w-10 md:h-10
+            rounded-xl
             bg-white/20
             flex items-center justify-center
-            text-xl
+            text-lg md:text-xl
             backdrop-blur-sm
+            flex-shrink-0
+            ml-3
           "
                             >
                                 {item.icon}

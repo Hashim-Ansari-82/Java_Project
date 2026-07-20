@@ -5,7 +5,7 @@ export const getBillings = () =>
     api.get("/billings");
 
 // Get bill by ID
-export const getBillingById = (id) =>
+export const getBillingById = (id) =>   
     api.get(`/billings/${id}`);
 
 // Create bill

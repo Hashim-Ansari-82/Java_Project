@@ -139,6 +139,30 @@ function Billings() {
     b.appointmentId?.toString().includes(search)
   );
 
+  // Total billings count
+  const totalBillings = billings.length;
+
+  // Total revenue amount
+  const totalRevenue = billings.reduce(
+    (sum, billing) => sum + Number(billing.amount || 0),
+    0
+  );
+
+  const billingStats = [
+    {
+      title: "Total Billings",
+      count: totalBillings,
+      icon: <FaFileInvoiceDollar />,
+      bg: "from-green-500 to-emerald-600",
+    },
+    {
+      title: "Total Revenue",
+      count: `₹${totalRevenue.toLocaleString()}`,
+      icon: <FaFileInvoiceDollar />,
+      bg: "from-blue-500 to-indigo-600",
+    },
+  ];
+
   return (
     <div className="p-6">
       {/* Header */}
@@ -166,6 +190,65 @@ function Billings() {
           onChange={(e) => setSearch(e.target.value)}
           className="w-full pl-10 pr-4 py-2 border rounded-lg focus:ring-2 focus:ring-green-500 outline-none"
         />
+      </div>
+
+      {/* <!-- BILLING STATISTICS CARDS --> */}
+      <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
+
+        {billingStats.map((item, index) => (
+
+          <div
+            key={index}
+            className={`
+        bg-gradient-to-r ${item.bg}
+        rounded-2xl
+        shadow-md
+        px-3 py-2.5
+        text-white
+        border border-white/10
+        transition-all duration-300
+        hover:-translate-y-0.5
+        hover:shadow-xl
+        cursor-pointer
+        min-h-[78px]
+      `}
+          >
+
+            <div className="flex justify-between items-center h-full">
+
+              <div className="flex-1 min-w-0">
+
+                <p className="text-[10px] md:text-[11px] opacity-90 font-semibold uppercase tracking-wider truncate">
+                  {item.title}
+                </p>
+
+                <h1 className="text-xl md:text-2xl font-extrabold mt-1 leading-none">
+                  {item.count}
+                </h1>
+
+              </div>
+
+              <div
+                className="
+            w-9 h-9 md:w-10 md:h-10
+            rounded-xl
+            bg-white/20
+            flex items-center justify-center
+            text-lg md:text-xl
+            backdrop-blur-sm
+            flex-shrink-0
+            ml-3
+          "
+              >
+                {item.icon}
+              </div>
+
+            </div>
+
+          </div>
+
+        ))}
+
       </div>
 
       {/* Table */}
@@ -234,20 +317,25 @@ function Billings() {
 
       {/* Modal */}
       {showModal && (
-        <div className="fixed inset-0 bg-black bg-opacity-40 flex items-center justify-center z-50">
-          <div className="bg-white rounded-2xl p-6 w-full max-w-md">
-            <h2 className="text-xl font-bold mb-4">
+        <div className="fixed inset-0 bg-black/30 flex items-center justify-center z-50 p-4">
+
+          <div className="bg-white text-slate-800 rounded-3xl p-6 w-full max-w-md shadow-2xl border border-gray-100">
+
+            <h2 className="text-2xl font-bold mb-5 text-slate-800">
               {isEdit ? "Update Billing" : "Add Billing"}
             </h2>
 
             <form
               onSubmit={isEdit ? handleUpdate : handleSubmit}
-              className="space-y-4"
+              className="space-y-5"
             >
+
+              {/* Amount */}
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
                   Amount
                 </label>
+
                 <input
                   type="number"
                   step="0.01"
@@ -255,12 +343,24 @@ function Billings() {
                   value={formData.amount}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
+                  className="
+              w-full
+              border border-gray-300
+              rounded-xl
+              px-4 py-3
+              bg-white text-slate-800
+              outline-none
+              focus:ring-2 focus:ring-green-500
+              focus:border-green-500
+              transition
+            "
+                  placeholder="Enter amount"
                 />
               </div>
 
+              {/* Appointment */}
               <div>
-                <label className="block text-sm font-medium mb-1">
+                <label className="block text-sm font-semibold text-slate-700 mb-2">
                   Appointment
                 </label>
 
@@ -269,7 +369,17 @@ function Billings() {
                   value={formData.appointmentId}
                   onChange={handleChange}
                   required
-                  className="w-full border rounded-lg px-3 py-2 focus:ring-2 focus:ring-green-500 outline-none"
+                  className="
+              w-full
+              border border-gray-300
+              rounded-xl
+              px-4 py-3
+              bg-white text-slate-800
+              outline-none
+              focus:ring-2 focus:ring-green-500
+              focus:border-green-500
+              transition
+            "
                 >
                   <option value="">Select Appointment</option>
 
@@ -281,23 +391,44 @@ function Billings() {
                 </select>
               </div>
 
+              {/* Buttons */}
               <div className="flex justify-end gap-3 pt-2">
+
                 <button
                   type="button"
                   onClick={closeModal}
-                  className="px-4 py-2 border rounded-lg hover:bg-gray-100"
+                  className="
+              px-5 py-2.5
+              rounded-xl
+              border border-gray-300
+              text-slate-700
+              hover:bg-gray-50
+              transition
+            "
                 >
                   Cancel
                 </button>
 
                 <button
                   type="submit"
-                  className="px-4 py-2 bg-green-600 text-white rounded-lg hover:bg-green-700"
+                  className="
+              px-5 py-2.5
+              rounded-xl
+              bg-gradient-to-r from-green-600 to-emerald-600
+              text-white
+              font-semibold
+              hover:from-green-700 hover:to-emerald-700
+              shadow-lg
+              transition
+            "
                 >
                   {isEdit ? "Update" : "Save"}
                 </button>
+
               </div>
+
             </form>
+
           </div>
         </div>
       )}

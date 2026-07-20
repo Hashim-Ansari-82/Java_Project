@@ -3,9 +3,11 @@ import {
     FaPlus,
     FaSearch,
     FaEdit,
-    FaTrash
+    FaTrash,
+    FaCalendarCheck,
+    FaClock,
+    FaCheckCircle
 } from "react-icons/fa";
-
 import API from "../api/axiosConfig";
 
 
@@ -41,7 +43,7 @@ function Appointments() {
         getAppointments();
         getDoctors();
         getPatients();
-       getDepartments();
+        getDepartments();
     }, []);
 
 
@@ -295,9 +297,37 @@ function Appointments() {
 
     );
 
+    const totalAppointments = appointments.length;
+    const pendingAppointments = appointments.filter(a => a.status === "Pending").length;
+    const confirmedAppointments = appointments.filter(a => a.status === "Confirmed").length;
+    const completedAppointments = appointments.filter(a => a.status === "Completed").length;
 
-
-
+    const appointmentStats = [
+        {
+            title: "Total Appointments",
+            count: totalAppointments,
+            icon: <FaCalendarCheck />,
+            bg: "from-blue-500 to-indigo-600",
+        },
+        {
+            title: "Pending",
+            count: pendingAppointments,
+            icon: <FaClock />,
+            bg: "from-yellow-500 to-orange-600",
+        },
+        {
+            title: "Confirmed",
+            count: confirmedAppointments,
+            icon: <FaCheckCircle />,
+            bg: "from-emerald-500 to-green-600",
+        },
+        {
+            title: "Completed",
+            count: completedAppointments,
+            icon: <FaCheckCircle />,
+            bg: "from-purple-500 to-indigo-600",
+        },
+    ];
 
     return (
 
@@ -387,7 +417,64 @@ outline-none
 
             </div>
 
+            {/* <!-- APPOINTMENT STATISTICS CARDS --> */}
+            <div className="grid grid-cols-2 md:grid-cols-4 gap-3 mb-5">
 
+                {appointmentStats.map((item, index) => (
+
+                    <div
+                        key={index}
+                        className={`
+        bg-gradient-to-r ${item.bg}
+        rounded-2xl
+        shadow-md
+        px-3 py-2.5
+        text-white
+        border border-white/10
+        transition-all duration-300
+        hover:-translate-y-0.5
+        hover:shadow-xl
+        cursor-pointer
+        min-h-[78px]
+      `}
+                    >
+
+                        <div className="flex justify-between items-center h-full">
+
+                            <div className="flex-1 min-w-0">
+
+                                <p className="text-[10px] md:text-[11px] opacity-90 font-semibold uppercase tracking-wider truncate">
+                                    {item.title}
+                                </p>
+
+                                <h1 className="text-xl md:text-2xl font-extrabold mt-1 leading-none">
+                                    {item.count}
+                                </h1>
+
+                            </div>
+
+                            <div
+                                className="
+            w-9 h-9 md:w-10 md:h-10
+            rounded-xl
+            bg-white/20
+            flex items-center justify-center
+            text-lg md:text-xl
+            backdrop-blur-sm
+            flex-shrink-0
+            ml-3
+          "
+                            >
+                                {item.icon}
+                            </div>
+
+                        </div>
+
+                    </div>
+
+                ))}
+
+            </div>
 
 
 
