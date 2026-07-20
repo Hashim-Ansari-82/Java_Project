@@ -12,7 +12,6 @@ public class BillingMapper {
 	public Billing dtoToEntity(BillingRequestDto dto) {
 		
 		Billing billing = new Billing();
-		billing.setId(dto.getId());
 		billing.setAmount(dto.getAmount());
 		
 		return billing;
@@ -20,8 +19,15 @@ public class BillingMapper {
 	public BillingResponseDto entityToDto(Billing dto) {
 		
 		BillingResponseDto responseDto = new BillingResponseDto();
+		
 		responseDto.setId(dto.getId());
 		responseDto.setAmount(dto.getAmount());
+		
+		 if (dto.getAppointment() != null) {
+	            responseDto.setAppointmentId(
+	                dto.getAppointment().getId()
+	            );
+	        }
 		
 		return responseDto;
 	}

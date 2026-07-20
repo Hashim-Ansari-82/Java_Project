@@ -12,7 +12,6 @@ public class DepartmentMapper {
 	public Department dtoToEntity(DepartmentRequestDto dto) {
 		
 		Department department = new Department();
-		department.setId(dto.getId());
 		department.setName(dto.getName());
 		
 		return department;

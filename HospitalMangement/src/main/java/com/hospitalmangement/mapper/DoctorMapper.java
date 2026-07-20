@@ -12,7 +12,6 @@ public class DoctorMapper {
 	public Doctor dtoToEntity(DoctorRequestDto dto) {
 		
 		Doctor doctor = new Doctor();
-		doctor.setId(dto.getId());
 		doctor.setName(dto.getName());
 		doctor.setSpecialization(dto.getSpecialization());
 		return doctor;

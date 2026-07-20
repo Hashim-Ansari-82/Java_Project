@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 import lombok.AllArgsConstructor;
 
 @RestController
-@RequestMapping("/patients")
+@RequestMapping("/api/patients")
 @AllArgsConstructor
 public class PatientController {
 
@@ -48,7 +48,7 @@ public class PatientController {
 		return "Data Deleted Successfully";
 	}
 	@PutMapping("/{id}")
-	public PatientResponseDto update(@PathVariable Integer id,@RequestBody PatientRequestDto dto) {
+	public PatientResponseDto update(@PathVariable Integer id,@Valid @RequestBody PatientRequestDto dto) {
 		return patientService.update(id, dto);
 	}
 }

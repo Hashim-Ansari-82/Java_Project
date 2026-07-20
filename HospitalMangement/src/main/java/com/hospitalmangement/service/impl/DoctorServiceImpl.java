@@ -68,8 +68,12 @@ public class DoctorServiceImpl implements DoctorService{
 		Doctor exDoctor = doctorRepository.findById(id)
 		.orElseThrow(() -> new ResourceNotFoundException("Doctor not found by this id "+id));
 		
+		Department department = departmentRepository.findById(dto.getDepartmentId())
+				.orElseThrow(() -> new ResourceNotFoundException("Department not found"));
+		
 		exDoctor.setName(dto.getName());
 		exDoctor.setSpecialization(dto.getSpecialization());
+		exDoctor.setDepartment(department);
 		
 		Doctor save = doctorRepository.save(exDoctor);
 		

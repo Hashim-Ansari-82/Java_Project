@@ -7,8 +7,6 @@ import lombok.Data;
 @Data
 public class DepartmentRequestDto {
 
-	@NotNull(message = "Id is Required")
-	private Integer id;
 	@NotBlank(message = "Required")
 	private String name;
 }

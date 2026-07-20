@@ -10,9 +10,6 @@ import lombok.Data;
 @Data
 public class PatientRequestDto {
 
-	    @NotNull(message = "Please Enter Id")
-	    private Integer id;
-
 	    @NotBlank(message = "Name is required")
 	    private String name;
 
@@ -31,7 +28,7 @@ public class PatientRequestDto {
 	    @NotBlank(message = "Mobile number is required")
 	    @Pattern(
 	        regexp = "^[6-9]\\d{9}$",
-	        message = "Mobile number must be 10 digits and start with 6-9"
+	        message = "Please enter proper formate of number"
 	    )
 	    private String mobile;
 

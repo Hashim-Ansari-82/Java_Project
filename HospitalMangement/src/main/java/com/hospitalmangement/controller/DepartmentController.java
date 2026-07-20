@@ -19,7 +19,7 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/departments")
+@RequestMapping("/api/departments")
 @RequiredArgsConstructor
 public class DepartmentController {
 

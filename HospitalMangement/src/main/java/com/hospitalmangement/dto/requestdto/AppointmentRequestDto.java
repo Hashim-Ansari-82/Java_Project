@@ -3,25 +3,36 @@ package com.hospitalmangement.dto.requestdto;
 import java.time.LocalDate;
 import java.time.LocalTime;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
+
 import jakarta.validation.constraints.FutureOrPresent;
-import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
+
 
 @Data
 public class AppointmentRequestDto {
 
-	@NotNull(message = "Id is Required")
-	private Integer id;
-	@NotBlank(message = "Time is Required")
-	private LocalTime time;
-	@NotBlank(message = "Date is Required")
-	@FutureOrPresent(message = "Date can not be in the past")
-	private LocalDate date;
-	@NotBlank(message = "Status is Required")
-	private String status;
-	@NotNull
-	private Integer doctorId;
-	@NotNull
-	private Integer  patientId;
+
+    @NotNull(message = "Time is Required")
+    @JsonFormat(pattern = "HH:mm")
+    private LocalTime time;
+
+
+    @NotNull(message = "Date is Required")
+    @FutureOrPresent(message = "Date cannot be in past")
+    @JsonFormat(pattern = "yyyy-MM-dd")
+    private LocalDate date;
+
+
+    private String status;
+
+
+    @NotNull(message = "Doctor is Required")
+    private Integer doctorId;
+
+
+    @NotNull(message = "Patient is Required")
+    private Integer patientId;
+
 }

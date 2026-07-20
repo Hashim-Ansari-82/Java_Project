@@ -10,9 +10,8 @@ import com.hospitalmangement.entity.Prescription;
 public class PrescriptionMapper {
 
 	public Prescription dtoToEntity(PrescriptionRequestDto dto) {
-		
+		 
 		Prescription prescription = new Prescription();
-		prescription.setId(dto.getId());
 		prescription.setInstruction(dto.getInstruction());
 		prescription.setMedicine(dto.getMedicine());
 		

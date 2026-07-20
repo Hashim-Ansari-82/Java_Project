@@ -19,32 +19,47 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/appointments")
+@RequestMapping("/api/appointments")
 @RequiredArgsConstructor
 public class AppointmentController {
 
 	private final AppointmentService service;
-	
+
 	@PostMapping
 	public AppointmentResponseDto save(@Valid @RequestBody AppointmentRequestDto dto) {
+
 		return service.save(dto);
+
 	}
+
 	@GetMapping
-	public List<AppointmentResponseDto> getAll(){
-		
+	public List<AppointmentResponseDto> getAll() {
+
 		return service.getAll();
+
 	}
+
 	@GetMapping("/{id}")
 	public AppointmentResponseDto getById(@PathVariable Integer id) {
+
 		return service.getById(id);
+
 	}
+
+	@PutMapping("/{id}")
+	public AppointmentResponseDto update(@PathVariable Integer id, @RequestBody AppointmentRequestDto dto) {
+
+		return service.update(id, dto);
+
+	}
+
 	@DeleteMapping("/{id}")
 	public String delete(@PathVariable Integer id) {
+
 		service.delete(id);
+
 		return "Deleted Successfully";
+
 	}
-	@PutMapping("/{id}")
-	public AppointmentResponseDto update(@PathVariable Integer id,@RequestBody AppointmentRequestDto dto) {
-		return service.update(id, dto);
-	}
+
 }

@@ -66,10 +66,14 @@ public class BillingServiceImpl implements BillingService{
 	@Override
 	public BillingResponseDto update(Integer id, BillingRequestDto dto) {
 		
+		Appointment appointment = appoiRepository.findById(dto.getAppointmentId())
+				.orElseThrow(() ->new ResourceNotFoundException("No Appointment this id "+dto.getAppointmentId()));
+		
 		Billing exBill = billingRepository
 		.findById(id).orElseThrow(() -> new ResourceNotFoundException("Bill not Found this id "+id));
 		
 		exBill.setAmount(dto.getAmount());
+		exBill.setAppointment(appointment);
 		
 		Billing save = billingRepository.save(exBill);
 		BillingResponseDto entityToDto = mapper.entityToDto(save);

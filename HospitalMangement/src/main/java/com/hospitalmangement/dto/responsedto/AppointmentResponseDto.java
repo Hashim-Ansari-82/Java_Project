@@ -5,11 +5,27 @@ import java.time.LocalTime;
 
 import lombok.Data;
 
+
 @Data
 public class AppointmentResponseDto {
 
-	private Integer id;
-	private LocalTime time;
-	private LocalDate date;
-	private String status;
+
+    private Integer id;
+
+    private LocalTime time;
+
+    private LocalDate date;
+
+    private String status;
+
+
+    private Integer doctorId;
+
+    private String doctorName;
+
+
+    private Integer patientId;
+
+    private String patientName;
+
 }

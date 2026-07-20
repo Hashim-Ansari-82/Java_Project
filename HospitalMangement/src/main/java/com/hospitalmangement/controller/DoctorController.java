@@ -2,6 +2,7 @@ package com.hospitalmangement.controller;
 
 import java.util.List;
 
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,11 +20,11 @@ import jakarta.validation.Valid;
 import lombok.RequiredArgsConstructor;
 
 @RestController
-@RequestMapping("/doctors")
+@RequestMapping("/api/doctors")
 @RequiredArgsConstructor
 public class DoctorController {
 
-	private final DoctorService doctorService;
+	private final DoctorService doctorService; 
 	
 	@PostMapping
 	public DoctorResponseDto save(@Valid @RequestBody DoctorRequestDto dto) {
