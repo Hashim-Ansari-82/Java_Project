@@ -52,7 +52,7 @@ function Sidebar() {
               }
             >
               <FaHome className="text-lg" />
-              <span>Dashboard</span>
+              <span>Reception</span>
             </NavLink>
           </li>
 

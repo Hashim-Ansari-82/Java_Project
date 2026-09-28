@@ -108,7 +108,7 @@ const [currentTime, setCurrentTime] = useState("");
 
         <div>
           <h1 className="text-3xl md:text-4xl font-bold text-slate-800 tracking-tight">
-            Hospital Dashboard
+            Hospital Reception
           </h1>
 
           <p className="text-gray-500 mt-1 text-sm md:text-base">

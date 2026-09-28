@@ -1,10 +1,8 @@
 package com.hospitalmangement.service.impl;
 
-
 import java.util.List;
 
 import org.springframework.stereotype.Service;
-
 
 import com.hospitalmangement.dto.requestdto.AppointmentRequestDto;
 import com.hospitalmangement.dto.responsedto.AppointmentResponseDto;
@@ -20,180 +18,85 @@ import com.hospitalmangement.service.dao.AppointmentService;
 
 import lombok.RequiredArgsConstructor;
 
-
 @Service
 @RequiredArgsConstructor
-public class AppointmentServiceimpl 
-        implements AppointmentService {
+public class AppointmentServiceimpl implements AppointmentService {
 
+	private final AppointmentRepository repository;
+	private final DoctorRepository doctorRepository;
+	private final PatientRepository patientRepository;
+	private final AppointmentMapper mapper;
 
+	@Override
+	public AppointmentResponseDto save(AppointmentRequestDto dto) {
 
-    private final AppointmentRepository repository;
+		Doctor doctor = doctorRepository.findById(dto.getDoctorId())
+				.orElseThrow(() -> new ResourceNotFoundException("Doctor not found : " + dto.getDoctorId()));
 
-    private final DoctorRepository doctorRepository;
+		Patient patient = patientRepository.findById(dto.getPatientId())
+				.orElseThrow(() -> new ResourceNotFoundException("Patient not found : " + dto.getPatientId()));
 
-    private final PatientRepository patientRepository;
+		Appointment appointment = mapper.dtoToEntity(dto);
 
-    private final AppointmentMapper mapper;
+		appointment.setDoctor(doctor);
+		appointment.setPatient(patient);
 
+		Appointment saved = repository.save(appointment);
 
+		return mapper.entityToDto(saved);
 
+	}
 
+	@Override
+	public List<AppointmentResponseDto> getAll() {
 
-    @Override
-    public AppointmentResponseDto save(
-            AppointmentRequestDto dto) {
+		return repository.findAll().stream().map(mapper::entityToDto).toList();
 
+	}
 
-        Doctor doctor =
-        doctorRepository.findById(dto.getDoctorId())
-        .orElseThrow(
-        () -> new ResourceNotFoundException(
-        "Doctor not found : "+dto.getDoctorId()));
+	@Override
+	public AppointmentResponseDto getById(Integer id) {
 
+		Appointment appointment = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Appointment not found : " + id));
 
+		return mapper.entityToDto(appointment);
 
-        Patient patient =
-        patientRepository.findById(dto.getPatientId())
-        .orElseThrow(
-        () -> new ResourceNotFoundException(
-        "Patient not found : "+dto.getPatientId()));
+	}
 
+	@Override
+	public AppointmentResponseDto update(Integer id, AppointmentRequestDto dto) {
 
+		Appointment appointment = repository.findById(id)
+				.orElseThrow(() -> new ResourceNotFoundException("Appointment not found : " + id));
 
-        Appointment appointment =
-                mapper.dtoToEntity(dto);
+		Doctor doctor = doctorRepository.findById(dto.getDoctorId())
+				.orElseThrow(() -> new ResourceNotFoundException("Doctor not found"));
 
+		Patient patient = patientRepository.findById(dto.getPatientId())
+				.orElseThrow(() -> new ResourceNotFoundException("Patient not found"));
 
+		appointment.setDate(dto.getDate());
 
-        appointment.setDoctor(doctor);
+		appointment.setTime(dto.getTime());
 
-        appointment.setPatient(patient);
+		appointment.setStatus(dto.getStatus());
 
+		appointment.setDoctor(doctor);
 
+		appointment.setPatient(patient);
 
-        Appointment saved =
-                repository.save(appointment);
+		Appointment updated = repository.save(appointment);
 
+		return mapper.entityToDto(updated);
 
+	}
 
-        return mapper.entityToDto(saved);
+	@Override
+	public void delete(Integer id) {
 
-    }
+		repository.deleteById(id);
 
-
-
-
-
-
-
-    @Override
-    public List<AppointmentResponseDto> getAll(){
-
-
-        return repository.findAll()
-                .stream()
-                .map(mapper::entityToDto)
-                .toList();
-
-    }
-
-
-
-
-
-
-
-    @Override
-    public AppointmentResponseDto getById(
-            Integer id){
-
-
-        Appointment appointment =
-        repository.findById(id)
-        .orElseThrow(
-        () -> new ResourceNotFoundException(
-        "Appointment not found : "+id));
-
-
-        return mapper.entityToDto(appointment);
-
-    }
-
-
-
-
-
-
-
-
-    @Override
-    public AppointmentResponseDto update(
-            Integer id,
-            AppointmentRequestDto dto){
-
-
-
-        Appointment appointment =
-        repository.findById(id)
-        .orElseThrow(
-        () -> new ResourceNotFoundException(
-        "Appointment not found : "+id));
-
-
-
-
-        Doctor doctor =
-        doctorRepository.findById(dto.getDoctorId())
-        .orElseThrow(
-        () -> new ResourceNotFoundException(
-        "Doctor not found"));
-
-
-
-        Patient patient =
-        patientRepository.findById(dto.getPatientId())
-        .orElseThrow(
-        () -> new ResourceNotFoundException(
-        "Patient not found"));
-
-
-
-
-        appointment.setDate(dto.getDate());
-
-        appointment.setTime(dto.getTime());
-
-        appointment.setStatus(dto.getStatus());
-
-        appointment.setDoctor(doctor);
-
-        appointment.setPatient(patient);
-
-
-
-        Appointment updated =
-                repository.save(appointment);
-
-
-
-        return mapper.entityToDto(updated);
-
-    }
-
-
-
-
-
-
-
-
-    @Override
-    public void delete(Integer id){
-
-        repository.deleteById(id);
-
-    }
-
+	}
 
 }
